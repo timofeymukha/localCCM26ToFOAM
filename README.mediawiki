@@ -5,7 +5,7 @@ Convert Star-CCM mesh to OpenFOAM format.
 See
 https://github.com/wyldckat/localCCM26ToFOAM
 for the original repo and legal info.
-This adapts it to modern versions form ESI.
+This adapts it to modern versions from ESI.
 Should be enough to run ./Allwmake
 Tested for v1806 and v1912, should in principle work for those in between.
 
