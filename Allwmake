@@ -65,28 +65,18 @@ USAGE
     exit 1
 }
 
-
 # get tar.gz file if required
-if [ "$1" = "DownloadFromVisIt" ]
+echo "Downloading from VisIt's third party online folder:"
+downloadFile $tarFile $url
+
+if [ -e download/$tarFile ]
 then
-
-    echo "Downloading from VisIt's third party online folder:"
-    downloadFile $tarFile $url
-
-    if [ -e download/$tarFile ]
-    then
-        echo "unpack download/$tarFile"
-        tar -xzf download/$tarFile
-    else
-        echo "no download/$tarFile to unpack"
-    fi
-  
-elif [ ! -d ${packageDir} ]
-then
-
-    usage
-
+    echo "unpack download/$tarFile"
+    tar -xzf download/$tarFile
+else
+    echo "no download/$tarFile to unpack"
 fi
+  
 
 set -x
 
@@ -97,6 +87,12 @@ set -x
     cp -n ../wmakeFiles/libccmio/* Make/
 
     wmake libso
+    mkdir ../ccm/libccmio
+    cp lnInclude/* ../ccm/libccmio
+    cd ../ccm
+    wmake
+    cd ../ccmToFoam
+    wmake
 )
 
 
