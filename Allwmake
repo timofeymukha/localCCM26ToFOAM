@@ -88,15 +88,17 @@ set -x
 
     wmake libso
     
-    cp -r $FOAM_APP/utilities/mesh/conversion/ccm/ccmToFoam/ccmToFoam.C ccmToFoam/
+    mkdir ../ccm/libccmio
+    cp lnInclude/* ../ccm/libccmio
+
+    cd ..
+    cp $FOAM_APP/utilities/mesh/conversion/ccm/ccmToFoam/ccmToFoam.C ccmToFoam
     cp -r $FOAM_SRC/conversion/ccm/common ccm/
     cp -r $FOAM_SRC/conversion/ccm/reader ccm/
     cp -r $FOAM_SRC/conversion/ccm/writer ccm/
     cp -r $FOAM_SRC/conversion/ccm/remapping ccm/
 
-    mkdir ../ccm/libccmio
-    cp lnInclude/* ../ccm/libccmio
-    cd ../ccm
+    cd ccm
     wmake
     cd ../ccmToFoam
     wmake
